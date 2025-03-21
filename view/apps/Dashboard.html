@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- <script src="/view/js/dashboard.js"></script> -->
+  </head>
+  <body class="flex">
+    <!-- Sidebar -->
+    <div
+      id="sidebar"
+      class="bg-gray-100 fixed top-0 left-0 w-[18.75rem] h-full p-8 transition-transform transform -translate-x-full md:translate-x-0 space-y-12"
+    >
+      <div class="flex gap-1">
+        <img src="../images/logo.png" alt="" class="w-10" />
+        <div class="flex">
+          <h1 class="text-3xl font-semibold">Share</h1>
+          <h1 class="text-3xl text-blue-600 font-semibold">Kit</h1>
+        </div>
+      </div>
+
+      <div class="mt-6 flex flex-col gap-y-4">
+        <a
+          href="../apps/Dashboard.html"
+          class="flex items-center gap-2 text-lg font-medium bg-zinc-200 px-3 py-2 rounded"
+        >
+          <i class="ri-dashboard-fill text-3xl"></i> Dashboard
+        </a>
+
+        <a
+          href="../apps/files.html"
+          class="flex items-center gap-2 text-lg font-medium bg-zinc-200 px-3 py-2 rounded"
+        >
+          <i class="ri-file-fill text-3xl"></i> Files
+        </a>
+      </div>
+
+      <div>
+          <div class="bg-white h-2 mb-2">
+            <div class="bg-blue-600 w-[50%] h-full">
+        
+            </div>
+          </div>
+
+
+          <label class="text-sm  ">
+            200.05Mb of 1024Mb
+          </label>
+      </div>
+
+      <a class="bg-slate-900 w-full p-3 text-white block text-center rounded">
+        <i class="ri-money-rupee-circle-fill text-lg"></i>
+        Upgrade Now
+      </a>
+    </div>
+
+    <!-- Toggle Button for Sidebar -->
+    <button
+      id="toggleSidebar"
+      class="fixed top-4 left-4 bg-blue-600 text-white p-2 rounded-md md:hidden"
+    >
+      ☰
+    </button>
+
+    <!-- Main Content -->
+    <div class="flex-1 ml-0 md:ml-[18.75rem] p-8 transition-all">
+      <h1 class="text-2xl">Dashboard</h1>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-8 gap-6">
+        <div
+          class="border border-gray-300 rounded-lg flex justify-center items-center flex-col py-8"
+        >
+          <i class="ri-file-3-fill text-4xl"></i>
+          <h1>Image</h1>
+          <h1 class="text-3xl font-bold mt-4">300Mb</h1>
+        </div>
+
+        <div
+          class="border border-gray-300 rounded-lg flex justify-center items-center flex-col py-8"
+        >
+          <i class="ri-file-3-fill text-4xl"></i>
+          <h1>Image</h1>
+          <h1 class="text-3xl font-bold mt-4">300Mb</h1>
+        </div>
+
+        <div
+          class="border border-gray-300 rounded-lg flex justify-center items-center flex-col py-8"
+        >
+          <i class="ri-file-3-fill text-4xl"></i>
+          <h1>Image</h1>
+          <h1 class="text-3xl font-bold mt-4">300Mb</h1>
+        </div>
+
+        <div
+          class="border border-gray-300 rounded-lg flex justify-center items-center flex-col py-8"
+        >
+          <i class="ri-file-3-fill text-4xl"></i>
+          <h1>Image</h1>
+          <h1 class="text-3xl font-bold mt-4">300Mb</h1>
+        </div>
+
+        <div
+          class="border border-gray-300 rounded-lg flex justify-center items-center flex-col py-8 col-span-1 sm:col-span-2"
+        >
+          <div id="chart"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Toggle Sidebar
+      document
+        .getElementById("toggleSidebar")
+        .addEventListener("click", function () {
+          const sidebar = document.getElementById("sidebar");
+          sidebar.classList.toggle("-translate-x-full");
+        });
+
+      // ApexCharts
+      var options = {
+        series: [44, 55, 13, 43, 22],
+        chart: {
+          width: 380,
+          type: "pie",
+        },
+        labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 200,
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        ],
+      };
+
+      var chart = new ApexCharts(document.querySelector("#chart"), options);
+      chart.render();
+    </script>
+  </body>
+</html>

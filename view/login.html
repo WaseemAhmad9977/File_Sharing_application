@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="grid md:grid-cols-2 grid-cols-1 h-screen overflow-hidden">
+      <div class="flex justify-center items-center flex-col gap-y-6 ">
+        <div class="flex gap-1">
+          <img src="/images/logo.png" alt="" class="w-10" />
+          <div class="flex">
+            <h1 class="text-3xl font-semibold">Share</h1>
+            <h1 class="text-3xl text-blue-600 font-semibold">Kit</h1>
+          </div>
+
+         
+        </div>
+
+        <h1 class="md:text-5xl text-3xl md:font-bold font-medium">Welcome Back!</h1>
+        <p class="text-lg text-gray-500">Add your info to use our services</p>
+
+        <form class="w-4/6 space-y-6">
+          <input class="p-4 border border-gray-400 w-full rounded-md" required type="text" name="email" placeholder="Enter your email" />
+          <input class="p-4 border border-gray-400 w-full rounded-md" required type="password" name="password" placeholder="Enter your password" />
+          <button class="bg-slate-900 p-4 rounded-lg text-white font-semibold w-full">Sign In</button>
+        </form>
+
+        <div>
+          <label for="">I don't have an account.</label>
+          <a class="text-blue-600 text-base font-medium" href="/signup.html">Create account</a>
+        </div>
+      </div>
+      <div>
+        <img class="hidden md:block" src="/images/login-bg.jpg" alt="" class="w-full h-full object-cover" />
+      </div>
+    </div>
+  </body>
+</html>

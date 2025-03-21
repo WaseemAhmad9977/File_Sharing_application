@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <!-- <script src="/view/js/dashboard.js"></script> -->
+  </head>
+  <body class="flex">
+    <!-- Sidebar -->
+    <div
+      id="sidebar"
+      class="bg-gray-100 fixed top-0 left-0 w-[18.75rem] h-full p-8 transition-transform transform -translate-x-full md:translate-x-0 space-y-12"
+    >
+      <div class="flex gap-1">
+        <img src="../images/logo.png" alt="" class="w-10" />
+        <div class="flex">
+          <h1 class="text-3xl font-semibold">Share</h1>
+          <h1 class="text-3xl text-blue-600 font-semibold">Kit</h1>
+        </div>
+      </div>
+
+      <div class="mt-6 flex flex-col gap-y-4">
+        <a
+          href="../apps/Dashboard.html"
+          class="flex items-center gap-2 text-lg font-medium bg-zinc-200 px-3 py-2 rounded"
+        >
+          <i class="ri-dashboard-fill text-3xl"></i> Dashboard
+        </a>
+
+        <a
+          href="#"
+          class="flex items-center gap-2 text-lg font-medium bg-zinc-200 px-3 py-2 rounded"
+        >
+          <i class="ri-file-fill text-3xl"></i> Files
+        </a>
+      </div>
+
+      <div>
+        <div class="bg-white h-2 mb-2">
+          <div class="bg-blue-600 w-[50%] h-full"></div>
+        </div>
+
+        <label class="text-sm"> 200.05Mb of 1024Mb </label>
+      </div>
+
+      <a class="bg-slate-900 w-full p-3 text-white block text-center rounded">
+        <i class="ri-money-rupee-circle-fill text-lg"></i>
+        Upgrade Now
+      </a>
+    </div>
+
+    <!-- Toggle Button for Sidebar -->
+    <button
+      id="toggleSidebar"
+      class="fixed top-4 left-4 bg-blue-600 text-white p-2 rounded-md md:hidden"
+    >
+      ☰
+    </button>
+
+    <!-- Main Content -->
+    <div class="flex-1 ml-0 md:ml-[18.75rem] p-8 transition-all">
+      <h1 class="text-2xl font-semibold">Files</h1>
+
+      <div class="bg-blue-600 rounded-lg mt-8 md:p-16 p-4 text-white text-center bg-gradient-to-r from-indigo-500 via-purple-500 relative to-pink-500 ">
+        <i class="ri-upload-2-line text-4xl"></i>
+        <p>Choose a file to upload now</p>
+        <input type="file" class=" absolute top-0 left-0 w-full h-full opacity-0 ">
+      </div>
+
+
+      <div class="mt-8 gap-6 overflow-x-auto">
+        <table class="w-full min-w-max">
+          <tr class="bg-gray-200 text-left">
+            <th class="py-4 pl-3">S/NO</th>
+            <th>FIlename</th>
+            <th>Size</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+
+          <tr class="border-b">
+            <td class="py-4 pl-3">1</td>
+            <td>Demo.txt</td>
+            <td>300Mb</td>
+            <td>Image</td>
+            <td>20 June 2023</td>
+
+            <td>
+              <div class="space-x-2">
+                <button class="bg-rose-500 w-8 h-10 rounded">
+                  <i class="ri-delete-bin-6-line"></i>
+                </button>
+
+                <button class="bg-green-500 w-8 h-10 rounded">
+                  <i class="ri-share-line"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr class="border-b">
+            <td class="py-4 pl-3">1</td>
+            <td>Demo.txt</td>
+            <td>300Mb</td>
+            <td>Image</td>
+            <td>20 June 2023</td>
+
+            <td>
+              <div class="space-x-2">
+                <button class="bg-rose-500 w-8 h-10 rounded">
+                  <i class="ri-delete-bin-6-line"></i>
+                </button>
+
+                <button class="bg-green-500 w-8 h-10 rounded">
+                  <i class="ri-share-line"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+
+          <tr class="border-b">
+            <td class="py-4 pl-3">1</td>
+            <td>Demo.txt</td>
+            <td>300Mb</td>
+            <td>Image</td>
+            <td>20 June 2023</td>
+
+            <td>
+              <div class="space-x-2">
+                <button class="bg-rose-500 w-8 h-10 rounded">
+                  <i class="ri-delete-bin-6-line"></i>
+                </button>
+
+                <button class="bg-green-500 w-8 h-10 rounded">
+                  <i class="ri-share-line"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr class="border-b">
+            <td class="py-4 pl-3">1</td>
+            <td>Demo.txt</td>
+            <td>300Mb</td>
+            <td>Image</td>
+            <td>20 June 2023</td>
+
+            <td>
+              <div class="space-x-2">
+                <button class="bg-rose-500 w-8 h-10 rounded">
+                  <i class="ri-delete-bin-6-line"></i>
+                </button>
+
+                <button class="bg-green-500 w-8 h-10 rounded">
+                  <i class="ri-share-line"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+        <div class="flex justify-end gap-1 mt-2">
+          <button class="bg-slate-900 rounded px-4 py-2 text-white">1</button>
+          <button class="bg-slate-900 rounded px-4 py-2 text-white">2</button>
+          <button class="bg-slate-900 rounded px-4 py-2 text-white">3</button>
+          <button class="bg-slate-900 rounded px-4 py-2 text-white">4</button>
+          <button class="bg-slate-900 rounded px-4 py-2 text-white">5</button>
+        </div>..,
+      </div>
+    </div>
+
+    <script>
+      // Toggle Sidebar
+      document
+        .getElementById("toggleSidebar")
+        .addEventListener("click", function () {
+          const sidebar = document.getElementById("sidebar");
+          sidebar.classList.toggle("-translate-x-full");
+        });
+    </script>
+  </body>
+</html>
