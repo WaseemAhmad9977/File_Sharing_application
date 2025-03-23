@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.8.4/axios.min.js "></script>
+  </head>
+  <body>
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Enhanced Product Design</title>
+        <link
+          href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+          rel="stylesheet"
+        />
+        <link
+          href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+          rel="stylesheet"
+        />
+        <style>
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          @keyframes pulse {
+            0%,
+            100% {
+              transform: scale(1);
+            }
+            50% {
+              transform: scale(1.05);
+            }
+          }
+          .animate-fadeIn {
+            animation: fadeIn 0.6s ease-out;
+          }
+          .hover\:pulse:hover {
+            animation: pulse 0.8s infinite;
+          }
+        </style>
+      </head>
+      <body
+        class="bg-gradient-to-br from-green-200 via-green-300 to-teal-200 min-h-screen p-6 flex items-center justify-center"
+      >
+        <div
+          class="bgg-green min-h-screen grid grid-cols-12 gap-6 max-w-7xl w-full"
+        >
+          <!-- Form Section -->
+          <div
+            class="md:col-span-4 col-span-12 p-4 bg-white rounded-2xl shadow-xl animate-fadeIn"
+          >
+            <div class="p-6">
+              <h2 class="text-2xl font-bold text-gray-800 mb-6">Add Product</h2>
+              <form class="flex flex-col gap-4" onsubmit="submitProduct(event)">
+                <input
+                  id="title"
+                  type="text"
+                  placeholder="Enter the title here"
+                  required
+                  class="border-2 border-gray-200 rounded-lg px-4 py-3 bg-gray-50 text-gray-700 focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-200 transition duration-300"
+                />
+                <input
+                  id="price"
+                  type="number"
+                  placeholder="Enter the price"
+                  required
+                  class="border-2 border-gray-200 rounded-lg px-4 py-3 bg-gray-50 text-gray-700 focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-200 transition duration-300"
+                />
+                <button
+                  id="submitButton"
+                  class="bg-gradient-to-r from-black to-gray-800 text-white px-6 py-3 rounded-lg hover:from-gray-900 hover:to-black transition duration-300 transform hover:scale-105 hover:pulse"
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Product Display Section -->
+          <div
+            class="md:col-span-8 col-span-12 p-4 bg-white rounded-2xl shadow-xl animate-fadeIn"
+          >
+            <div class="p-6">
+              <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                Product List
+              </h2>
+              <div
+                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
+                id="product"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </body>
+    </html>
+  </body>
+</html>
+
+<script>
+  let currentEditId = null;
+  window.onload = () => {
+    fetchProduct();
+  };
+
+  const submitProduct = async (e) => {
+    if (currentEditId) return saveChages(e);
+    e.preventDefault();
+    try {
+      const data = {
+        title: document.getElementById("title").value,
+        price: document.getElementById("price").value,
+      };
+      const response = await axios.post("/product", data);
+      console.log(response.data);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchProduct = async () => {
+    try {
+      const { data } = await axios.get("/product");
+      console.log(data);
+      const products = document.getElementById("product");
+      for (let item of data.products) {
+        // console.log()
+
+        const ui = `
+         <div
+                  class="p-4 bg-gradient-to-br from-pink-100 to-pink-200 rounded-xl shadow-md hover:shadow-lg transition duration-300"
+                >
+                  <h1 class="text-2xl font-bold text-gray-800">${item.title}</h1>
+                  <h1 class="font-semibold text-lg text-gray-600">${item.price}</h1>
+                  <div class="flex gap-3 mt-3">
+                    <button onclick="deleteProduct('${item._id}')"
+                      class="p-2 text-red-600 hover:text-red-800 transition duration-300 transform hover:scale-110"
+                    >
+                      <i class="ri-delete-bin-6-fill text-2xl"></i>
+                    </button>
+                    <button
+                      class="p-2 text-blue-600 hover:text-blue-800 transition duration-300 transform hover:scale-110"
+                      onclick="editProduct('${item._id}','${item.title}','${item.price}')"
+                    >
+                      <i class="ri-eraser-fill text-2xl"></i>
+                    </button>
+                  </div>
+                </div>
+        `;
+        products.innerHTML += ui;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  async function deleteProduct(id) {
+    try {
+      const response = await axios.delete(`/product/${id}`);
+      console.log("product is deleted succesfully", response.data);
+      window.location.reload();
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  }
+
+  const editProduct = (_id, title, price) => {
+    currentEditId = _id;
+    const titleElem = document.getElementById("title");
+    const priceElem = document.getElementById("price");
+    titleElem.value = title;
+    priceElem.value = price;
+    const submitButton = document.getElementById("submitButton");
+    submitButton.innerHTML = "save changes";
+    submitButton.classList.remove(
+      "bg-gradient-to-r",
+      "from-black",
+      "to-gray-800"
+    );
+    submitButton.classList.add("bg-rose-500");
+  };
+
+  const saveChages = async (e) => {
+    e.preventDefault(e);
+    try {
+      const data = {
+        title: document.getElementById("title").value,
+        price: document.getElementById("price").value,
+      };
+      const res =await axios.put(`/product/${currentEditId}`,data);
+      window.location.reload()
+      
+    } catch (error) {}
+  };
+</script>
