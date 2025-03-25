@@ -4,36 +4,72 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../js/session.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.8.4/axios.min.js"></script> 
+    
+   
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   
+    <script src="js/login.js"></script>
+   
+    <style>
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fadeIn { animation: fadeIn 0.6s ease-out; }
+    </style>
   </head>
-  <body>
+  <body class="bg-gradient-to-br from-gray-100 to-blue-50 min-h-screen">
     <div class="grid md:grid-cols-2 grid-cols-1 h-screen overflow-hidden">
-      <div class="flex justify-center items-center flex-col gap-y-6 ">
-        <div class="flex gap-1">
-          <img src="/images/logo.png" alt="" class="w-10" />
+      <!-- Left Section -->
+      <div class="flex justify-center items-center flex-col gap-y-8 bg-white md:bg-transparent p-6 md:p-0 animate-fadeIn">
+        <div class="flex items-center gap-2">
+          <img src="/images/logo.png" alt="Logo" class="w-12 rounded-full shadow-md" />
           <div class="flex">
-            <h1 class="text-3xl font-semibold">Share</h1>
-            <h1 class="text-3xl text-blue-600 font-semibold">Kit</h1>
+            <h1 class="text-4xl font-bold text-gray-800">Share</h1>
+            <h1 class="text-4xl font-bold text-blue-600">Kit</h1>
           </div>
-
-         
         </div>
 
-        <h1 class="md:text-5xl text-3xl md:font-bold font-medium">Welcome Back!</h1>
-        <p class="text-lg text-gray-500">Add your info to use our services</p>
+        <h1 class="md:text-5xl text-3xl font-extrabold text-gray-900 tracking-tight">Welcome Back!</h1>
+        <p class="text-lg text-gray-600 font-medium">Add your info to use our services</p>
 
-        <form class="w-4/6 space-y-6">
-          <input class="p-4 border border-gray-400 w-full rounded-md" required type="text" name="email" placeholder="Enter your email" />
-          <input class="p-4 border border-gray-400 w-full rounded-md" required type="password" name="password" placeholder="Enter your password" />
-          <button class="bg-slate-900 p-4 rounded-lg text-white font-semibold w-full">Sign In</button>
+        <form class="w-4/6 space-y-6" onsubmit="login(event)">
+          <input 
+            class="p-4 border border-gray-300 w-full rounded-lg bg-gray-50 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-300" 
+            required 
+            type="text" 
+            name="email" 
+            placeholder="Enter your email" 
+          />
+          <input 
+            class="p-4 border border-gray-300 w-full rounded-lg bg-gray-50 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-300" 
+            required 
+            type="password" 
+            name="password" 
+            placeholder="Enter your password" 
+          />
+          <button 
+            class="bg-gradient-to-r from-slate-900 to-gray-800 p-4 rounded-lg text-white font-semibold w-full hover:from-gray-900 hover:to-black transition duration-300 transform hover:scale-105"
+          >
+            Sign In
+          </button>
         </form>
 
-        <div>
-          <label for="">I don't have an account.</label>
-          <a class="text-blue-600 text-base font-medium" href="/signup.html">Create account</a>
+        <div class="flex items-center gap-2">
+          <label class="text-gray-600 text-base">I don't have an account.</label>
+          <a class="text-blue-600 text-base font-semibold hover:underline transition duration-200" href="/signup.html">Create account</a>
         </div>
       </div>
+
+      <!-- Right Section (Image) -->
       <div>
-        <img class="hidden md:block" src="/images/login-bg.jpg" alt="" class="w-full h-full object-cover" />
+        <img 
+          class="hidden md:block w-full h-full object-cover transition-opacity duration-500 hover:opacity-90" 
+          src="/images/login-bg.jpg" 
+          alt="Background" 
+        />
       </div>
     </div>
   </body>

@@ -10,6 +10,7 @@
       rel="stylesheet"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.8.4/axios.min.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
     <!DOCTYPE html>
@@ -128,7 +129,14 @@
       };
       const response = await axios.post("/product", data);
       console.log(response.data);
-      window.location.reload();
+      Swal.fire({
+        title: "Success!",
+        text: "Your action was successful",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(() => {
+        window.location=location.href
+      });
     } catch (error) {
       console.log(error);
     }
@@ -174,7 +182,14 @@
     try {
       const response = await axios.delete(`/product/${id}`);
       console.log("product is deleted succesfully", response.data);
-      window.location.reload();
+      Swal.fire({
+        title: "Success!",
+        text: "Your action was successful",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(() => {
+        window.location=location.href
+      });
     } catch (error) {
       console.log(error.response.data);
     }
@@ -197,15 +212,23 @@
   };
 
   const saveChages = async (e) => {
-    e.preventDefault(e);
+    e.preventDefault(e); 
     try {
       const data = {
         title: document.getElementById("title").value,
         price: document.getElementById("price").value,
       };
-      const res =await axios.put(`/product/${currentEditId}`,data);
-      window.location.reload()
+      const res = await axios.put(`/product/${currentEditId}`, data);
       
-    } catch (error) {}
+      Swal.fire({
+        title: "Success!",
+        text: "Your action was successful",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(() => {
+        window.location=location.href
+      });
+    } 
+    catch (error) {}
   };
 </script>
