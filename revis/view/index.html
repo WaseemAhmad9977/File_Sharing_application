@@ -132,7 +132,7 @@
       Swal.fire({
         title: "Success!",
         text: "Your action was successful",
-        ico n: "success",
+        icon: "success",
         confirmButtonText: "OK",
       }).then(() => {
         window.location=location.href
@@ -212,7 +212,7 @@
   };
 
   const saveChages = async (e) => {
-    e.preventDefault(e);
+    e.preventDefault(e); 
     try {
       const data = {
         title: document.getElementById("title").value,
