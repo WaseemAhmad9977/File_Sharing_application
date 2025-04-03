@@ -1,75 +1,107 @@
+// let session = null;
+// window.onload = async () => {
+//   session = await localStorage.getItem("auth");
 
-let session = null;
-window.onload = async ()=>{
-     session = await localStorage.getItem('auth')
-    
-    if((location.pathname ==='/login.html' || location.pathname==='/signup.html') && !session )
-        return 
+//   if (
+//     (location.pathname === "/login.html" ||
+//       location.pathname === "/signup.html") &&
+//     !session
+//   )
+//     return;
 
-    if(!session)
+//   if (!session) return (window.location = "/login.html");
+//   try {
+//     const response = await axios.post("/api/verify-token", { token: session });
+//     // console.log(response.data)
 
-        return window.location = '/login.html'
-    try{
-        const response = await axios.post('/api/verify-token',{token:session})
-        // console.log(response.data)
-        
-        if(location.pathname ==='/login.html' || location.pathname==='/signup.html')
-                    return window.location ='apps/dashboard.html'
-                
-        profileInfo(response.data.user)
-        // console.log(response.data.user)
-    }
-    catch(err)
-    {
-        console.log(err)
+//     if (
+//       location.pathname === "/login.html" ||
+//       location.pathname === "/signup.html"
+//     )
+//       return (window.location = "apps/dashboard.html");
 
-        localStorage.clear()
-        window.location='/login.html'
-    }
-}
+//     profileInfo(response.data.user);
+//     // console.log(response.data.user)
+//   } catch (err) {
+//     console.log(err);
 
-const logout =()=>{
-   localStorage.clear()
-   window.location = '/login.html'
-}
+//     localStorage.clear();
+//     window.location = "/login.html";
+//   }
+// };
 
-const profileInfo = (user)=>{
-    const fullname = document.getElementById('fullnameUser')
-    const email = document.getElementById('emailUser')
-    fullname.innerHTML=user.fullname
-    email.innerHTML = user.email
+// const logout = () => {
+//   localStorage.clear();
+//   window.location = "/login.html";
+// };
 
-    const image = document.getElementById('profileImg')
-    image.src = user.picture ? '/'+user.picture : '../images/avtar.avif'
-    console.log(user)
-}
+// const profileInfo = (user) => {
+//   try {
+//     const fullname = document.getElementById("fullnameUser");
+//     const email = document.getElementById("emailUser");
+//     fullname.innerHTML = user.fullname;
+//     email.innerHTML = user.email;
 
-const uploadProfile=async (e)=>{
-    try{
-      const input = e.target
-     const file = input.files[0]
-     const formData = new FormData();
-     formData.append('picture',file)
-      
-     const option ={
-        headers:{
-            Authorization:`Bearer ${session}`
-        }
-     }
-     
-     try{
-       const res =await axios.post('/api/upload-profile-picture',formData,option)
-       console.log(res.data)
-       await localStorage.setItem('auth',res.data.token)
-       window.location= location.href
-     }
-     catch(err){
-        console.log(err)
-     }
+//     const image = document.getElementById("profileImg");
+//     image.src = user.picture ? "/" + user.picture : "../images/avtar.avif";
 
+//     fetchFile();
+//   } catch (err) {
+//     console.log(err);
+//   }
+
+//   // console.log(user)
+// };
+
+// const uploadProfile = async (e) => {
+//   try {
+//     const input = e.target;
+//     const file = input.files[0];
+//     const formData = new FormData();
+//     formData.append("picture", file);
+
+//     const option = {
+//       headers: {
+//         Authorization: `Bearer ${session}`,
+//       },
+//     };
+
+//     try {
+//       const res = await axios.post(
+//         "/api/upload-profile-picture",
+//         formData,
+//         option
+//       );
+//       console.log(res.data);
+//       await localStorage.setItem("auth", res.data.token);
+//       window.location = location.href;
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+
+const getSession = async () => {
+  const session = localStorage.getItem("auth");
+  
+  if (!session) return null;
+  
+  try {
+    const res = await axios.post("/api/verify-token", { token: session });
+    return {
+      token:session,
+      user:res.data.user
+    };
+
+  } catch (err) {
+    return null
   }
-  catch(err)
-  {
-    console.log(err)
-  }    
-}
+
+};
+
+const logout = () => {
+  localStorage.clear();
+  window.location = "/login.html";
+};
